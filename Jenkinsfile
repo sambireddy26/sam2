@@ -22,7 +22,7 @@ def readYMLEnvironmentKeys(GIT_BRANCH_LOCAL) {
 pipeline {
   agent {
     node {
-      label 'jenkins'
+      label 'master'
     }
   }
   // Define scheduler
@@ -45,7 +45,7 @@ pipeline {
     stage ('Checkout Code') {
       steps {
         script {
-          echo GIT_BRANCH_LOCAL
+          echo $GIT_BRANCH
           def GIT_BRANCH_LOCAL = "${GIT_BRANCH}" - "origin/"
           readYMLEnvironmentKeys(GIT_BRANCH_LOCAL)
         }
@@ -105,21 +105,21 @@ pipeline {
     // }
     stage ('Sonar Code Quality Scan') {
       steps {
-        script {
+       // script {
           
           // Set Sonar Path
          // ------ scannerHome = tool 'Sonar scanner'
-        }
+      //  }
 
         // Execute Sonnar Scanner
        //--------- withSonarQubeEnv('sonarqube server') 
-        {
+        //{
         //-----------  bat "${scannerHome}/bin/sonar-scanner.bat -Dsonar.projectKey=${SONAR_PRJECT_KEY} -Dsonar.projectVersion=${BUILD_NUMBER} -Dsonar.sources=. -Dsonar.projectName=${env.SONAR_PROJECT_NAME} -Dsonar.exclusions=${env.SONAR_EXCLUSIONS} -Dsonar.java.binaries=${env.SONAR_JAVA_BINARIES} -Dsonar.jacoco.reportPath=build/jacoco/jacocoRootMerge.exec"
         echo '$BUILD_NUMBER'
         echo '$SONAR_PROJECT_NAME'
         echo '$SONAR_EXCLUSIONS'
         echo '$SONAR_JAVA_BINARIES'
-        }
+       // }
       }
       post {
         failure {
