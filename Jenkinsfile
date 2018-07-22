@@ -36,10 +36,11 @@ pipeline {
     disableConcurrentBuilds()
   }
   // Injecting credentials into environment variables
-  environment {
+ // environment {
+   
   //  NEXUS_PASSWORD = credentials('NEXUS_PASSWORD')
    // NEXUS_PUBLISHER_PASSWORD = credentials('NEXUS_PUBLISHER_PASSWORD')
-  }
+ // }
   stages {
     stage ('Checkout Code') {
       steps {
@@ -50,23 +51,24 @@ pipeline {
         // Deleteing Workspace
         deleteDir()
         // Git clone steps
-        echo "$BRANCH"
+        echo '$BRANCH'
         git branch: '${BRANCH_NAME}', credentialsId: '8578c529-928d-45c8-9321-c7ed527a11b3', url: 'https://github.com/sambireddy26/sam2.git'
       }
       post {
         failure {
-          echo "Build Step Failed"
+          echo 'Build Step Failed'
         }
       }
     }
     stage ('UnitTest Cases') {
       steps {
+        powershell 'write-host this is unit test'
         //Running powershell script for unit test cases
        // powershell '.\\gradlew.bat -P nexusUrl=$env:NEXUS_URL -P nexusUsername=$env:NEXUS_USERNAME -P nexusPassword=$env:NEXUS_PASSWORD -P nexusPublisherUsername=$env:NEXUS_PUBLISHER_USERNAME -P nexusPublisherPassword=$env:NEXUS_PUBLISHER_PASSWORD clean build jacocoRootReport'
       }
       post {
         failure {
-          echo "Build Step Failed"
+          echo 'Build Step Failed'
         }
       }
     }
@@ -94,24 +96,26 @@ pipeline {
     //   }
     //   post {
     //     failure {
-    //       echo "Build Step Failed"
+    //       echo 'Build Step Failed'
     //     }
     //   }
     // }
     stage ('Sonar Code Quality Scan') {
       steps {
         script {
+          
           // Set Sonar Path
          // ------ scannerHome = tool 'Sonar scanner'
         }
 
         // Execute Sonnar Scanner
-       //--------- withSonarQubeEnv('sonarqube server') {
+       //--------- withSonarQubeEnv('sonarqube server') 
+        {
         //-----------  bat "${scannerHome}/bin/sonar-scanner.bat -Dsonar.projectKey=${SONAR_PRJECT_KEY} -Dsonar.projectVersion=${BUILD_NUMBER} -Dsonar.sources=. -Dsonar.projectName=${env.SONAR_PROJECT_NAME} -Dsonar.exclusions=${env.SONAR_EXCLUSIONS} -Dsonar.java.binaries=${env.SONAR_JAVA_BINARIES} -Dsonar.jacoco.reportPath=build/jacoco/jacocoRootMerge.exec"
-        echo ${BUILD_NUMBER}
-        echo ${env.SONAR_PROJECT_NAME}
-        echo ${env.SONAR_EXCLUSIONS}
-        echo ${env.SONAR_JAVA_BINARIES}
+        echo '$BUILD_NUMBER'
+        echo '$SONAR_PROJECT_NAME'
+        echo '$SONAR_EXCLUSIONS'
+        echo '$SONAR_JAVA_BINARIES'
         }
       }
       post {
