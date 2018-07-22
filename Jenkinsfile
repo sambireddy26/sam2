@@ -106,7 +106,8 @@ pipeline {
         }
 
         // Execute Sonnar Scanner
-       //--------- withSonarQubeEnv('sonarqube server') {
+       //--------- withSonarQubeEnv('sonarqube server')
+        {
         //-----------  bat "${scannerHome}/bin/sonar-scanner.bat -Dsonar.projectKey=${SONAR_PRJECT_KEY} -Dsonar.projectVersion=${BUILD_NUMBER} -Dsonar.sources=. -Dsonar.projectName=${env.SONAR_PROJECT_NAME} -Dsonar.exclusions=${env.SONAR_EXCLUSIONS} -Dsonar.java.binaries=${env.SONAR_JAVA_BINARIES} -Dsonar.jacoco.reportPath=build/jacoco/jacocoRootMerge.exec"
         echo ${BUILD_NUMBER}
         echo ${env.SONAR_PROJECT_NAME}
