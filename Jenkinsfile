@@ -67,6 +67,7 @@ pipeline {
         echo 'unit test success'
        // powershell 'write-host this is unit test'
         //Running powershell script for unit test cases
+        bash 'gradle clean build'
        // powershell '.\\gradlew.bat -P nexusUrl=$env:NEXUS_URL -P nexusUsername=$env:NEXUS_USERNAME -P nexusPassword=$env:NEXUS_PASSWORD -P nexusPublisherUsername=$env:NEXUS_PUBLISHER_USERNAME -P nexusPublisherPassword=$env:NEXUS_PUBLISHER_PASSWORD clean build jacocoRootReport'
       }
       post {
