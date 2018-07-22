@@ -50,16 +50,17 @@ pipeline {
           readYMLEnvironmentKeys(GIT_BRANCH_LOCAL)
         }
         // Deleteing Workspace
+        pwd()
         deleteDir()
         // Git clone steps
         //echo 'GIT_BRANCH'
         git branch: '${BRANCH_NAME}', credentialsId: '8578c529-928d-45c8-9321-c7ed527a11b3', url: 'https://github.com/sambireddy26/sam2.git'
       }
-      post {
-        failure {
-          echo 'Build Step Failed'
-        }
-      }
+    //  post {
+     //   failure {
+      //    echo 'Build Step Failed'
+      //  }
+    //  }
     }
     stage ('UnitTest Cases') {
       steps {
