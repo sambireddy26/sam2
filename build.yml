@@ -6,7 +6,7 @@
     SONAR_JAVA_BINARIES: "*/build/classes/java/main"
     EMAIL_TO: "sambi.techno@gmail.com"
 
-  dev:
+  Test_jenkins:
     SONAR_PROJECT_NAME: "cm-bd-devvvv"
     SONAR_PRJECT_KEY: "com.automationanywhere:cm-bd-devvvvv"
     SONAR_EXCLUSIONS: "gradle/**,build/**,lib/**,*/build/**,deploy/src/main/resources/files/*,packaging/src/main/resources/files/*"
