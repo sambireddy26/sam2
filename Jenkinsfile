@@ -30,7 +30,7 @@ pipeline {
     pollSCM('* * * * *')
   }
   // Define build properties
-  options 
+  options {
     buildDiscarder(logRotator(numToKeepStr:'2', artifactNumToKeepStr:'2'))
     timestamps()
     disableConcurrentBuilds()
