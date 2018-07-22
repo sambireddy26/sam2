@@ -45,7 +45,7 @@ pipeline {
     stage ('Checkout Code') {
       steps {
         script {
-          echo $GIT_BRANCH
+          //echo $GIT_BRANCH
           def GIT_BRANCH_LOCAL = "${GIT_BRANCH}" - "origin/"
           readYMLEnvironmentKeys(GIT_BRANCH_LOCAL)
         }
