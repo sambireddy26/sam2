@@ -1,7 +1,7 @@
 // Read yml file and inject keys into build environment variables
 def readYMLEnvironmentKeys(GIT_BRANCH_LOCAL) {
 
-  def yml_data = readYaml file: 'Jenkins\\commit\\build.yml'
+  def yml_data = readYaml file: 'build.yml'
   // Iterate over branch key in yml_data
   for ( branch_name in yml_data ) {
     if ( branch_name.key == GIT_BRANCH_LOCAL ) {
@@ -50,7 +50,8 @@ pipeline {
         // Deleteing Workspace
         deleteDir()
         // Git clone steps
-        git branch: '${BRANCH_NAME}', credentialsId: 'fb5dgfjjkghhvmgg', url: 'git@bmbnmd.git'
+        echo "$BRANCH"
+        git branch: '${BRANCH_NAME}', credentialsId: '8578c529-928d-45c8-9321-c7ed527a11b3', url: 'https://github.com/sambireddy26/sam2.git'
       }
       post {
         failure {
