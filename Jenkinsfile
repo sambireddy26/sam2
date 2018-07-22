@@ -36,10 +36,10 @@ pipeline {
     disableConcurrentBuilds()
   }
   // Injecting credentials into environment variables
-  environment {
+  //environment {
   //  NEXUS_PASSWORD = credentials('NEXUS_PASSWORD')
    // NEXUS_PUBLISHER_PASSWORD = credentials('NEXUS_PUBLISHER_PASSWORD')
-  }
+  //}
   stages {
     stage ('Checkout Code') {
       steps {
@@ -61,6 +61,7 @@ pipeline {
     }
     stage ('UnitTest Cases') {
       steps {
+        pwd ()
         //Running powershell script for unit test cases
        // powershell '.\\gradlew.bat -P nexusUrl=$env:NEXUS_URL -P nexusUsername=$env:NEXUS_USERNAME -P nexusPassword=$env:NEXUS_PASSWORD -P nexusPublisherUsername=$env:NEXUS_PUBLISHER_USERNAME -P nexusPublisherPassword=$env:NEXUS_PUBLISHER_PASSWORD clean build jacocoRootReport'
       }
@@ -101,6 +102,7 @@ pipeline {
     stage ('Sonar Code Quality Scan') {
       steps {
         script {
+          echo 'sonar code quality'
           // Set Sonar Path
          // ------ scannerHome = tool 'Sonar scanner'
         }
