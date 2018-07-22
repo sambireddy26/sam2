@@ -22,7 +22,7 @@ def readYMLEnvironmentKeys(GIT_BRANCH_LOCAL) {
 pipeline {
   agent {
     node {
-      label 'master'
+      label 'jenkins'
     }
   }
   // Define scheduler
