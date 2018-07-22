@@ -45,13 +45,14 @@ pipeline {
     stage ('Checkout Code') {
       steps {
         script {
+          echo GIT_BRANCH_LOCAL
           def GIT_BRANCH_LOCAL = "${GIT_BRANCH}" - "origin/"
           readYMLEnvironmentKeys(GIT_BRANCH_LOCAL)
         }
         // Deleteing Workspace
         deleteDir()
         // Git clone steps
-        echo '$BRANCH'
+        //echo 'GIT_BRANCH'
         git branch: '${BRANCH_NAME}', credentialsId: '8578c529-928d-45c8-9321-c7ed527a11b3', url: 'https://github.com/sambireddy26/sam2.git'
       }
       post {
@@ -112,10 +113,10 @@ pipeline {
        //--------- withSonarQubeEnv('sonarqube server') 
         {
         //-----------  bat "${scannerHome}/bin/sonar-scanner.bat -Dsonar.projectKey=${SONAR_PRJECT_KEY} -Dsonar.projectVersion=${BUILD_NUMBER} -Dsonar.sources=. -Dsonar.projectName=${env.SONAR_PROJECT_NAME} -Dsonar.exclusions=${env.SONAR_EXCLUSIONS} -Dsonar.java.binaries=${env.SONAR_JAVA_BINARIES} -Dsonar.jacoco.reportPath=build/jacoco/jacocoRootMerge.exec"
-        echo '$BUILD_NUMBER'
-        echo '$SONAR_PROJECT_NAME'
-        echo '$SONAR_EXCLUSIONS'
-        echo '$SONAR_JAVA_BINARIES'
+        echo 'BUILD_NUMBER'
+        echo 'SONAR_PROJECT_NAME'
+        echo 'SONAR_EXCLUSIONS'
+        echo 'SONAR_JAVA_BINARIES'
         }
       }
       post {
