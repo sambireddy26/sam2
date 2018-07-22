@@ -30,8 +30,8 @@ pipeline {
     pollSCM('* * * * *')
   }
   // Define build properties
-  options {
-    buildDiscarder(logRotator(numToKeepStr:'30', artifactNumToKeepStr:'30'))
+  options 
+    buildDiscarder(logRotator(numToKeepStr:'2', artifactNumToKeepStr:'2'))
     timestamps()
     disableConcurrentBuilds()
   }
@@ -64,7 +64,8 @@ pipeline {
     }
     stage ('UnitTest Cases') {
       steps {
-        powershell 'write-host this is unit test'
+        echo 'unit test success'
+       // powershell 'write-host this is unit test'
         //Running powershell script for unit test cases
        // powershell '.\\gradlew.bat -P nexusUrl=$env:NEXUS_URL -P nexusUsername=$env:NEXUS_USERNAME -P nexusPassword=$env:NEXUS_PASSWORD -P nexusPublisherUsername=$env:NEXUS_PUBLISHER_USERNAME -P nexusPublisherPassword=$env:NEXUS_PUBLISHER_PASSWORD clean build jacocoRootReport'
       }
@@ -114,10 +115,10 @@ pipeline {
        //--------- withSonarQubeEnv('sonarqube server') 
         {
         //-----------  bat "${scannerHome}/bin/sonar-scanner.bat -Dsonar.projectKey=${SONAR_PRJECT_KEY} -Dsonar.projectVersion=${BUILD_NUMBER} -Dsonar.sources=. -Dsonar.projectName=${env.SONAR_PROJECT_NAME} -Dsonar.exclusions=${env.SONAR_EXCLUSIONS} -Dsonar.java.binaries=${env.SONAR_JAVA_BINARIES} -Dsonar.jacoco.reportPath=build/jacoco/jacocoRootMerge.exec"
-        echo 'BUILD_NUMBER'
-        echo 'SONAR_PROJECT_NAME'
-        echo 'SONAR_EXCLUSIONS'
-        echo 'SONAR_JAVA_BINARIES'
+        echo '$BUILD_NUMBER'
+        echo '$SONAR_PROJECT_NAME'
+        echo '$SONAR_EXCLUSIONS'
+        echo '$SONAR_JAVA_BINARIES'
         }
       }
       post {
